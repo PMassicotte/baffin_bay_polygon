@@ -46,7 +46,7 @@ bbox <- st_bbox(c(
   ymax = 80
 )) |>
   st_as_sfc() |>
-  st_segmentize(dfMaxLength = 1/3) |>
+  st_segmentize(dfMaxLength = 1 / 3) |>
   st_set_crs(4326) |>
   st_transform(dest_proj)
 
