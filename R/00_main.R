@@ -5,6 +5,7 @@ library(rnaturalearth)
 library(rnaturalearthhires)
 library(crsuggest)
 library(mapview)
+library(styler)
 
 rm(list = ls())
 
@@ -14,7 +15,7 @@ overall_polygon <- st_read(here("data", "raw", "overall_polygon.geojson"))
 mapview(overall_polygon)
 
 dest_proj <- crsuggest::suggest_crs(overall_polygon) |>
-  head(1) |>
+  head(1L) |>
   pull(crs_code) |>
   as.numeric()
 
@@ -40,14 +41,14 @@ baffin_bay <- ocean |>
 mapview(baffin_bay)
 
 bbox <- st_bbox(c(
-  xmin = -85,
-  xmax = -40,
-  ymin = 64,
-  ymax = 80
+  xmin = -85L,
+  xmax = -40L,
+  ymin = 64L,
+  ymax = 80L
 )) |>
   st_as_sfc() |>
-  st_segmentize(dfMaxLength = 1 / 3) |>
-  st_set_crs(4326) |>
+  st_segmentize(dfMaxLength = 1L / 3L) |>
+  st_set_crs(4326L) |>
   st_transform(dest_proj)
 
 mapview(baffin_bay) +
@@ -65,9 +66,9 @@ baffin_bay_croped |>
 
 ggsave(
   here("graphs", "baffin_bay.png"),
-  width = 6,
-  height = 8,
-  dpi = 300,
+  width = 6L,
+  height = 8L,
+  dpi = 300L,
   bg = "white"
 )
 
